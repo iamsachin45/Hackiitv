@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- <head>
+    
+
+</head> -->
+<body>
+
+  <canvas id="myCanvas" width="1000" height="500"  style="border:1px solid #d63737;
+       background-color: white;" 
+      
+       ></canvas>
+    // <!-- Your browser does not support the HTML5 canvas tag.</canvas> -->
+    <!-- onmousemove="myfunction(event)" onmousedown="mymousedown()" -->
+    <!-- <script src="{{ url_for('static', filename='/canvas.js') }}"></script> -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.0/socket.io.js"></script>
+   <script > 
+  
+
+    // var socket = io.connect('http://localhost:3000/')
+     
+    // var socket = io('http://local')
+    var socket = io.connect('http://localhost:3000/')
+    var x;
+    var y;
+    let mousedown = false;
+    let c = document.getElementById("myCanvas");
+
+    let ctx = c.getContext("2d");
+    // function myfunction(event) 
+    // {
+
+      
+
+      window.onmousedown = (e) => {
+        ctx.moveTo(x, y);
+        // socket.emit('down',{x,y});
+        mousedown = true;
+
+      }
+      window.onmouseup = (e) => {
+        mousedown = false;
+      }
+
+      // socket.on('ondraw',({x,y}) =>
+      // {
+      //      ctx.lineTo(x, y);
+      //     // socket.emit('draw',(x,y))
+      //     ctx.stroke();
+
+      // });
+      // socket.on('ondown',({x,y})=>
+      // {
+      //   ctx.moveTo(x, y);
+
+      // });
+
+      window.onmousemove = (e) => {
+
+
+        x = event.clientX;
+        y = event.clientY;
+        if (mousedown) {
+          // socket.emit('draw',{x,y});
+          // io.emit('draw',(x,y))
+          ctx.lineTo(x, y);
+          // socket.emit('draw',(x,y))
+          ctx.stroke();
+          var st = "X coordinate is " + x + " and y coordinate is " + y;
+          console.log(st);
+        }
+      }
+
+    // }
+
+
+
+  </script> 
+
+</body>
+
+</html>
