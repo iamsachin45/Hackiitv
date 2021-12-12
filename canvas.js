@@ -4,7 +4,7 @@ var x;
 var y;
 let mousedown = false;
 let c = document.getElementById("myCanvas");
-// console.log("hello");
+
 let ctx = c.getContext("2d");
 socket.on('ondraw', ({ x, y }) => {
     ctx.lineTo(x, y);
@@ -18,13 +18,16 @@ socket.on('ondown', ({ x, y }) => {
 });
 
 c.addEventListener('mousedown', (e) => {
-    // console.log('hey there')
+    
+   
 
     ctx.moveTo(x, y);
     socket.emit('down', { x, y });
     mousedown = true;
 
 });
+
+
 c.addEventListener('mouseup', (e) => {
     mousedown = false;
 });
